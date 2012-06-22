@@ -2,7 +2,7 @@
  * Example how to interface with the GSCF Api using Groovy
  *
  * Api docs	: http://studies.dbnp.org/api
- * Usage	: groovy -classpath $CLASSPATH:./org/dbnp/ example.groovy
+ * Usage	: groovy -classpath $CLASSPATH:./org/dbxp/ example.groovy
  *
  *
  * Copyright 2012 Jeroen Wesbeek <work@osx.eu>
