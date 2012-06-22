@@ -19,7 +19,7 @@
  *  limitations under the License.
  */
 
-package org.dbnp
+package org.dbxp
 
 @Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.2' )
 import groovyx.net.http.*

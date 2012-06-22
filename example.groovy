@@ -21,7 +21,7 @@
  */
 
 // import the Groovy Client for GSCF
-import org.dbnp.GSCF
+import org.dbxp.GSCF
 
 // instantiate Client
 def gscf = new GSCF();
