@@ -34,7 +34,7 @@ import java.security.MessageDigest
 
 class GSCF {
 	private String version	= "0.1"
-	private BigInteger sequence
+	private BigInteger sequence = -1
 	private String token
 
 	protected String username
@@ -190,7 +190,7 @@ class GSCF {
 	 */
 	private BigInteger getSequence() {
 		// authenticate if we do yet have done so
-		if (!sequence) {
+		if (sequence < 0) {
 			// try to read sequence (and token) from cache file
 			if (!restoreFromDisk()) {
 				// authenticate to fetch token and sequence
