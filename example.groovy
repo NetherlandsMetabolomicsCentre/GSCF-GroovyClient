@@ -20,6 +20,9 @@
  * limitations under the License.
  */
 
+// requirements
+@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.2')
+
 // import the Groovy Client for GSCF
 import org.dbxp.GSCF
 
