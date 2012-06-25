@@ -21,7 +21,11 @@
 
 package org.dbxp
 
+// uncomment the following line if you intend to use this class
+// in your Grails project, or add the http-builder to 
+// your BuildConfig.groovy
 //@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.2' )
+
 import groovyx.net.http.*
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
