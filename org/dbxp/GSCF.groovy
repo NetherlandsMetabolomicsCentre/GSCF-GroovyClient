@@ -77,7 +77,7 @@ class GSCF {
 	 * restore token and sequence from disk
 	 * @return Boolean
 	 */
-	private restoreFromDisk() {
+	private Boolean restoreFromDisk() {
 		File cacheFile = new File(getCacheFile())
 		Boolean success = false
 
@@ -102,7 +102,7 @@ class GSCF {
 	 * get the path of the cache file
 	 * @return String
 	 */
-	private getCacheFile() {
+	private String getCacheFile() {
 		String tempName = (System.properties['os.name'].toLowerCase().contains('windows')) ? 'TEMP' : 'tmp'
 		String cacheFile = "/${tempName}/gscf-${getDeviceID()}.data"
 
@@ -114,7 +114,7 @@ class GSCF {
 	 * @param String username
 	 * @void
 	 */
-	public setUsername(String user) {
+	public void setUsername(String user) {
 		username = user
 	}
 
@@ -123,7 +123,7 @@ class GSCF {
 	 * @param String password
 	 * @void
 	 */
-	public setPassword(String pass) {
+	public void setPassword(String pass) {
 		password = pass
 	}
 
@@ -132,7 +132,7 @@ class GSCF {
 	 * @param String api key
 	 * @void
 	 */
-	public setApiKey(String key) {
+	public void setApiKey(String key) {
 		apiKey = key
 	}
 
@@ -141,7 +141,7 @@ class GSCF {
 	 * @param String url
 	 * @void
 	 */
-	public setURL(String apiURL) {
+	public void setURL(String apiURL) {
 		url = apiURL
 	}
 
@@ -150,7 +150,7 @@ class GSCF {
 	 * @param String
 	 * @void
 	 */
-	public setEndPoint(String apiEndPoint) {
+	public void setEndPoint(String apiEndPoint) {
 		endPoint = apiEndPoint
 	}
 
@@ -159,7 +159,7 @@ class GSCF {
 	 * @param String device id
 	 * @void
 	 */
-	public setDeviceID(String id) {
+	public void setDeviceID(String id) {
 		deviceID = id
 	}
 
@@ -202,9 +202,9 @@ class GSCF {
 
 	/**
 	 * generate a unique device id based on MAC address, script location and username
-	 * @return String
+	 * @return void
 	 */
-	def generateDeviceID() {
+	private void generateDeviceID() {
 		InetAddress ip
 		String macAddress
 
@@ -234,7 +234,7 @@ class GSCF {
 	 * getter for the deviceID
 	 * @return String
 	 */
-	def getDeviceID() {
+	private String getDeviceID() {
 		if (!deviceID) generateDeviceID()
 
 		return deviceID
@@ -244,7 +244,7 @@ class GSCF {
 	 * authenticate against the GSCF api
 	 * @void
 	 */
-	private authenticate() {
+	private void authenticate() {
 		// instantiate HTTP Builder
 		def http = new HTTPBuilder( url )
 
