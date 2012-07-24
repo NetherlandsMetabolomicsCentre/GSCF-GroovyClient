@@ -32,7 +32,7 @@ import static groovyx.net.http.Method.*
 
 import java.security.MessageDigest
 
-class GSCF {
+class GSCF implements GSCFClient{
 	private String version	= "0.1"
 	private BigInteger sequence = -1
 	private String token
@@ -52,6 +52,10 @@ class GSCF {
 	public GSCF() {
 		// add a shutdown hook to cache token and sequence
 		Runtime.getRuntime().addShutdownHook { cacheToDisk() }
+	}
+	
+	public static void main(String [] args){
+		//TODO: entry for executable JAR
 	}
 
 	/**

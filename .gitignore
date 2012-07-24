@@ -2,3 +2,6 @@ test.groovy
 testAndra.groovy
 .gradle
 build
+.settings
+.classpath
+.project
