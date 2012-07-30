@@ -317,10 +317,9 @@ class GSCF implements GSCFClient{
 		String validationSum = new BigInteger(1,digest.digest("${token}${sequence}${apiKey}".getBytes())).toString(16).padLeft(32,"0")
 
 		// define post arguments
-		def arguments	= [
-			deviceID	: deviceID,
-			validation	: validationSum
-		]
+		def arguments				= args 
+			arguments['deviceID'] 	= deviceID
+			arguments['validation']	= validationSum
 
 		// perform api call
 		def http = new HTTPBuilder(url)
@@ -342,6 +341,7 @@ class GSCF implements GSCFClient{
 
 			// failure handler
 			response.failure = { resp ->
+								
 				def code = resp.statusLine.statusCode
 
 				if (code == 401) {
@@ -371,8 +371,78 @@ class GSCF implements GSCFClient{
 	 * public call to fetch studies
 	 */
 	public getStudies() {
-		def studies = apiCall('getStudies')
-
-		return studies
+		return apiCall('getStudies')
 	}
+	
+	/**
+	 * public call to fetch all subjects of a study
+	 */
+	public getSubjectsForStudy(String studyToken) {
+		return apiCall('getSubjectsForStudy', ['studyToken': studyToken])
+	}
+	
+	/**
+	 * public call to fetch all assays of a study
+	 */
+	public getAssaysForStudy(String studyToken) {
+		return apiCall('getAssaysForStudy', ['studyToken': studyToken])
+	}
+	
+
+	/**
+	 * public call to fetch all event groups of a study
+	 */
+	public getEventGroupsForStudy(String studyToken) {
+		return apiCall('getEventGroupsForStudy', ['studyToken': studyToken])
+	}
+	
+	/**
+	 * public call to fetch all events of a study
+	 */
+	public getEventsForStudy(String studyToken) {
+		return apiCall('getEventsForStudy', ['studyToken': studyToken])
+	}
+
+	/**
+	 * public call to fetch all events of a study
+	 */
+	public getSamplingEventsForStudy(String studyToken) {
+		return apiCall('getSamplingEventsForStudy', ['studyToken': studyToken])
+	}
+	
+	/**
+	 * public call to fetch all sample of an assay
+	 */
+	public getSamplesForAssay(String assayToken) {
+		return apiCall('getSamplesForAssay', ['assayToken': assayToken])
+	}
+	
+	/**
+	 * public call to fetch all measurements of an assay
+	 */
+	public getMeasurementDataForAssay(String assayToken) {
+		return apiCall('getMeasurementDataForAssay', ['assayToken': assayToken])
+	}
+	
+	/**
+	 * public call to fetch all modules
+	 */
+	public getModules() {
+		return apiCall('getModules')
+	}
+	
+	/**
+	 * public call to fetch all entity types
+	 */
+	public getEntityTypes() {
+		return apiCall('getEntityTypes')
+	}
+	
+	/**
+	 * public call to fetch all entity types
+	 */
+	public getTemplatesForEntity(String entityType) {
+		return apiCall('getTemplatesForEntity', ['entityType': entityType])
+	}
+	
 }
