@@ -13,4 +13,8 @@ public interface GSCFClient {
 	def getModules()
 	def getEntityTypes()
 	def getTemplatesForEntity(String entityType)
+	def getFieldsForEntity(String entityType, String entityToken)
+	def getFieldsForEntityWithTemplate(String entityType, String templateToken)
+	def createEntity(String entityType, Map fields)
+	def createEntityWithTemplate(String entityType, String templateToken, Map fields)
 }

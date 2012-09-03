@@ -323,6 +323,7 @@ class GSCF implements GSCFClient{
 
 		// perform api call
 		def http = new HTTPBuilder(url)
+		
 		http.request( POST, JSON ) {
 			uri.path	= "/${endPoint}/${service}"
 			uri.query	= arguments
@@ -332,6 +333,7 @@ class GSCF implements GSCFClient{
 
 			// success handler
 			response.success = { resp, json ->
+								
 				if (resp.statusLine.statusCode == 200) {
 					return json
 				} else {
@@ -360,6 +362,8 @@ class GSCF implements GSCFClient{
 					}
 				} else if (code == 404) {
 					throw new Exception("the server appears to be down at ${url}/${endPoint}/${service}")
+				} else if (code == 500) {
+					throw new Exception("the server was not able to handle your request: status code ${resp.statusLine.statusCode}");
 				} else {
 					throw new Exception("server replied with an unexpected status code ${resp.statusLine.statusCode}");
 				}
@@ -388,7 +392,6 @@ class GSCF implements GSCFClient{
 		return apiCall('getAssaysForStudy', ['studyToken': studyToken])
 	}
 	
-
 	/**
 	 * public call to fetch all event groups of a study
 	 */
@@ -445,4 +448,34 @@ class GSCF implements GSCFClient{
 		return apiCall('getTemplatesForEntity', ['entityType': entityType])
 	}
 	
+	/**
+	 * public call to fetch all fields for an entity
+	 * 
+	 * entityType only will return the generic (model) fields only.
+	 * entityToken will add the additional fields based on the template related to the entity
+	 */
+	public getFieldsForEntity(String entityType, String entityToken = '') {
+		return apiCall('getFieldsForEntity', ['entityType': entityType, 'entityToken': entityToken])
+	}
+	
+	/**
+	 * public call to fetch all fields for an entity by template
+	 */
+	public getFieldsForEntityWithTemplate(String entityType, String templateToken) {
+		return apiCall('getFieldsForEntityWithTemplate', ['entityType': entityType, 'templateToken': templateToken])
+	}
+	
+	/**
+	 * public call to create an entity with the fields provided
+	 */
+	public createEntity(String entityType, Map fields) {
+		return apiCall('createEntity', ['entityType': entityType] + fields)
+	}
+	
+	/**
+	 * public call to create an entity with the fields provided with a template
+	 */
+	public createEntityWithTemplate(String entityType, String templateToken, Map fields) {
+		return apiCall('createEntityWithTemplate', ['entityType': entityType, 'templateToken': templateToken] + fields)
+	}
 }
