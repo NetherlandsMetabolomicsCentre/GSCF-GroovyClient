@@ -18,6 +18,7 @@ public class GSCFTest {
 	
 	// point to running instance of GSCF
 	final String URL = 'http://your-gscf-instance'
+	final String EndPoint = 'endpoint'
 	final String Username = 'username'
 	final String Password = 'password'
 	final String ApiKey = '4ec4730e-8d62-4c79-bc71-ed6a32698fb5'
@@ -31,6 +32,7 @@ public class GSCFTest {
 	public GSCFTest(){
 
 		gscf.setURL(URL)
+		gscf.setEndPoint(EndPoint)
 		gscf.setUsername(Username)
 		gscf.setPassword(Password)
 		gscf.setApiKey(ApiKey)			
