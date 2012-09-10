@@ -1,7 +1,7 @@
 package org.dbxp
 
 public interface GSCFClient {
-	
+
 	def getStudies()
 	def getSubjectsForStudy(String studyToken)
 	def getAssaysForStudy(String studyToken)

@@ -22,7 +22,7 @@
 package org.dbxp
 
 // uncomment the following line if you intend to use this class
-// in your Grails project, or add the http-builder to 
+// in your Grails project, or add the http-builder to
 // your BuildConfig.groovy
 //@Grab(group='org.codehaus.groovy.modules.http-builder', module='http-builder', version='0.5.2' )
 
@@ -53,7 +53,7 @@ class GSCF implements GSCFClient{
 		// add a shutdown hook to cache token and sequence
 		Runtime.getRuntime().addShutdownHook { cacheToDisk() }
 	}
-	
+
 	public static void main(String [] args){
 		//TODO: entry for executable JAR
 	}
@@ -92,7 +92,7 @@ class GSCF implements GSCFClient{
 		// read cache file if it exists
 		if (cacheFile.exists() && cacheFile.canRead()) {
 			cacheFile.withObjectInputStream { instream ->
-				instream.eachObject { 
+				instream.eachObject {
 					if (it.token && it.sequence) {
 						// restore token and sequence from cache
 						token		= it.token
@@ -289,7 +289,7 @@ class GSCF implements GSCFClient{
 				} else {
 					throw new Exception("server replied with an unexpected status code ${resp.statusLine.statusCode}")
 				}
-			}			
+			}
 		}
 	}
 
@@ -317,13 +317,13 @@ class GSCF implements GSCFClient{
 		String validationSum = new BigInteger(1,digest.digest("${token}${sequence}${apiKey}".getBytes())).toString(16).padLeft(32,"0")
 
 		// define post arguments
-		def arguments				= args 
+		def arguments				= args
 			arguments['deviceID'] 	= deviceID
 			arguments['validation']	= validationSum
 
 		// perform api call
 		def http = new HTTPBuilder(url)
-		
+
 		http.request( POST, JSON ) {
 			uri.path	= "/${endPoint}/${service}"
 			uri.query	= arguments
@@ -333,7 +333,7 @@ class GSCF implements GSCFClient{
 
 			// success handler
 			response.success = { resp, json ->
-								
+
 				if (resp.statusLine.statusCode == 200) {
 					return json
 				} else {
@@ -343,7 +343,7 @@ class GSCF implements GSCFClient{
 
 			// failure handler
 			response.failure = { resp ->
-								
+
 				def code = resp.statusLine.statusCode
 
 				if (code == 401) {
@@ -367,7 +367,7 @@ class GSCF implements GSCFClient{
 				} else {
 					throw new Exception("server replied with an unexpected status code ${resp.statusLine.statusCode}");
 				}
-			}			
+			}
 		}
 	}
 
@@ -377,28 +377,28 @@ class GSCF implements GSCFClient{
 	public getStudies() {
 		return apiCall('getStudies')
 	}
-	
+
 	/**
 	 * public call to fetch all subjects of a study
 	 */
 	public getSubjectsForStudy(String studyToken) {
 		return apiCall('getSubjectsForStudy', ['studyToken': studyToken])
 	}
-	
+
 	/**
 	 * public call to fetch all assays of a study
 	 */
 	public getAssaysForStudy(String studyToken) {
 		return apiCall('getAssaysForStudy', ['studyToken': studyToken])
 	}
-	
+
 	/**
 	 * public call to fetch all event groups of a study
 	 */
 	public getEventGroupsForStudy(String studyToken) {
 		return apiCall('getEventGroupsForStudy', ['studyToken': studyToken])
 	}
-	
+
 	/**
 	 * public call to fetch all events of a study
 	 */
@@ -412,66 +412,66 @@ class GSCF implements GSCFClient{
 	public getSamplingEventsForStudy(String studyToken) {
 		return apiCall('getSamplingEventsForStudy', ['studyToken': studyToken])
 	}
-	
+
 	/**
 	 * public call to fetch all sample of an assay
 	 */
 	public getSamplesForAssay(String assayToken) {
 		return apiCall('getSamplesForAssay', ['assayToken': assayToken])
 	}
-	
+
 	/**
 	 * public call to fetch all measurements of an assay
 	 */
 	public getMeasurementDataForAssay(String assayToken) {
 		return apiCall('getMeasurementDataForAssay', ['assayToken': assayToken])
 	}
-	
+
 	/**
 	 * public call to fetch all modules
 	 */
 	public getModules() {
 		return apiCall('getModules')
 	}
-	
+
 	/**
 	 * public call to fetch all entity types
 	 */
 	public getEntityTypes() {
 		return apiCall('getEntityTypes')
 	}
-	
+
 	/**
 	 * public call to fetch all entity types
 	 */
 	public getTemplatesForEntity(String entityType) {
 		return apiCall('getTemplatesForEntity', ['entityType': entityType])
 	}
-	
+
 	/**
 	 * public call to fetch all fields for an entity
-	 * 
+	 *
 	 * entityType only will return the generic (model) fields only.
 	 * entityToken will add the additional fields based on the template related to the entity
 	 */
 	public getFieldsForEntity(String entityType, String entityToken = '') {
 		return apiCall('getFieldsForEntity', ['entityType': entityType, 'entityToken': entityToken])
 	}
-	
+
 	/**
 	 * public call to fetch all fields for an entity by template
 	 */
 	public getFieldsForEntityWithTemplate(String entityType, String templateToken) {
 		return apiCall('getFieldsForEntityWithTemplate', ['entityType': entityType, 'templateToken': templateToken])
 	}
-	
+
 	/**
 	 * public call to create an entity with the fields provided
 	 */
 	public createEntity(String entityType, Map fields) {
 		return apiCall('createEntity', ['entityType': entityType] + fields)
 	}
-	
+
 	/**
 	 * public call to create an entity with the fields provided with a template
 	 */
