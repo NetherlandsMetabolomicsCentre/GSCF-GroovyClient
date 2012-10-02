@@ -300,15 +300,15 @@ class GSCF implements GSCFClient{
 	 * @param Boolean retried call?
 	 * @return JSONObject
 	 */
-	private apiCall(String service) {
+	public apiCall(String service) {
 		apiCall(service, [:], false)
 	}
 
-	private apiCall(String service, LinkedHashMap args) {
+	public apiCall(String service, LinkedHashMap args) {
 		apiCall(service, args, false)
 	}
 
-	private apiCall(String service, LinkedHashMap args, Boolean retry) {
+	public apiCall(String service, LinkedHashMap args, Boolean retry) {
 		def token	= getToken()
 		def sequence	= getSequence()
 
